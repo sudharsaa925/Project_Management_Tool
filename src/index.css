@@ -1,0 +1,153 @@
+:root {
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 🔹 Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🔹 Links */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #535bf2;
+  text-decoration: underline;
+}
+
+/* 🔹 Body */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(to bottom, #242424, #1a1a1a);
+}
+
+/* 🔹 Headings */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  text-align: center;
+}
+
+/* 🔹 Buttons */
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #005bb5, #0090ff);
+  transform: scale(1.05);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 3px solid #535bf2;
+}
+
+/* 🔹 Input Fields */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 2px solid #646cff;
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: #f9f9f9;
+  color: #213547;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: #535bf2;
+  box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  outline: none;
+}
+
+/* 🔹 Containers */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+  body {
+    padding: 10px;
+  }
+
+  button {
+    padding: 10px 16px;
+    font-size: 0.9em;
+  }
+}
+
+/* 🔹 Light Mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  
+  a {
+    color: #213547;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: white;
+  }
+
+  input, textarea {
+    background-color: white;
+    color: #213547;
+  }
+}
