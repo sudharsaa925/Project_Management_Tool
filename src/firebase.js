@@ -1,24 +1,23 @@
-// Import Firebase modules
+// Import Firebase dependencies
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
-// Firebase configuration
+// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDJcqEx46zMVTt6rFth2XUYpJrU02ML7LM",
+  authDomain: "project-management-tool-9e5b6.firebaseapp.com",
+  projectId: "project-management-tool-9e5b6",
+  storageBucket: "project-management-tool-9e5b6.firebasestorage.app",
+  messagingSenderId: "802921559583",
+  appId: "1:802921559583:web:89032417befdb71826c72a",
+  measurementId: "G-FHNZC9C46N"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase services
 const auth = getAuth(app);
-const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
-// Export services
-export { auth, db };
+// Export everything correctly
+export { auth, googleProvider, githubProvider };

@@ -66,59 +66,45 @@ const Content = styled.div`
   align-items: center;
 `;
 
-// Dashboard Stats
-const DashboardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+// Task List Styles
+const TaskList = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin-top: 20px;
 `;
 
-const StatCard = styled.div`
+const TaskItem = styled.div`
   background: ${(props) => (props.darkMode ? "#252525" : "#fff")};
-  padding: 20px;
-  border-radius: 15px;
+  padding: 15px;
+  border-radius: 10px;
   box-shadow: ${(props) =>
     props.darkMode
       ? "0px 4px 10px rgba(255, 255, 255, 0.1)"
       : "0px 4px 10px rgba(0, 0, 0, 0.1)"};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
   animation: ${fadeIn} 0.5s ease-in-out;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
+`;
+
+const TaskTitle = styled.span`
+  font-size: 1rem;
+`;
+
+const TaskButton = styled.button`
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background: ${(props) => (props.completed ? "#1db954" : "#ff6a00")};
+  color: white;
+  transition: 0.3s ease-in-out;
 
   &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
-const StatTitle = styled.h3`
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-`;
-
-const StatValue = styled.p`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${(props) => (props.darkMode ? "#1db954" : "#007bff")};
-`;
-
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 8px;
-  background: ${(props) => (props.darkMode ? "#333" : "#ddd")};
-  border-radius: 5px;
-  margin-top: 10px;
-  position: relative;
-  overflow: hidden;
-
-  div {
-    width: ${(props) => props.progress}%;
-    height: 100%;
-    background: ${(props) => (props.darkMode ? "#1db954" : "#007bff")};
-    border-radius: 5px;
-    transition: width 0.5s ease-in-out;
+    transform: scale(1.05);
+    background: ${(props) => (props.completed ? "#17a747" : "#ee0979")};
   }
 `;
 
@@ -144,22 +130,31 @@ const FloatingAddButton = styled.button`
   }
 `;
 
-function Dashboard() {
+function Tasks() {
   const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
-  const [projectsCount, setProjectsCount] = useState(5);
-  const [tasksCompleted, setTasksCompleted] = useState(65);
+  const [tasks, setTasks] = useState([
+    { id: 1, title: "Complete UI Design", completed: false },
+    { id: 2, title: "Fix Backend Issues", completed: true },
+    { id: 3, title: "Update Documentation", completed: false },
+  ]);
+
+  const toggleTaskCompletion = (taskId) => {
+    setTasks(tasks.map(task =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    ));
+  };
 
   return (
     <Layout darkMode={darkMode}>
       {/* Sidebar */}
       <Sidebar darkMode={darkMode}>
-        <h2>📊 Dashboard</h2>
+        <h2>✅ Tasks</h2>
+        <SidebarButton darkMode={darkMode} onClick={() => navigate("/dashboard")}>
+          📊 Dashboard
+        </SidebarButton>
         <SidebarButton darkMode={darkMode} onClick={() => navigate("/projects")}>
           📁 Projects
-        </SidebarButton>
-        <SidebarButton darkMode={darkMode} onClick={() => navigate("/tasks")}>
-          ✅ Tasks
         </SidebarButton>
         <SidebarButton darkMode={darkMode} onClick={() => navigate("/profile")}>
           👤 Profile
@@ -174,36 +169,31 @@ function Dashboard() {
 
       {/* Main Content */}
       <Content>
-        <h1>Welcome to Your Dashboard 🎉</h1>
-        <p>Track your projects, tasks, and progress in one place.</p>
+        <h1>Your Tasks 📋</h1>
+        <p>Manage your tasks efficiently and track progress.</p>
 
-        {/* Dashboard Stats */}
-        <DashboardGrid>
-          <StatCard darkMode={darkMode}>
-            <StatTitle>📌 Total Projects</StatTitle>
-            <StatValue>{projectsCount}</StatValue>
-          </StatCard>
-          <StatCard darkMode={darkMode}>
-            <StatTitle>✅ Completed Tasks</StatTitle>
-            <StatValue>{tasksCompleted}%</StatValue>
-            <ProgressBar darkMode={darkMode} progress={tasksCompleted}>
-              <div></div>
-            </ProgressBar>
-          </StatCard>
-          <StatCard darkMode={darkMode}>
-            <StatTitle>⏳ Pending Tasks</StatTitle>
-            <StatValue>{100 - tasksCompleted}%</StatValue>
-            <ProgressBar darkMode={darkMode} progress={100 - tasksCompleted}>
-              <div></div>
-            </ProgressBar>
-          </StatCard>
-        </DashboardGrid>
+        {/* Task List */}
+        <TaskList>
+          {tasks.map((task) => (
+            <TaskItem key={task.id} darkMode={darkMode}>
+              <TaskTitle>{task.title}</TaskTitle>
+              <TaskButton
+                completed={task.completed}
+                onClick={() => toggleTaskCompletion(task.id)}
+              >
+                {task.completed ? "Completed ✅" : "Mark as Done"}
+              </TaskButton>
+            </TaskItem>
+          ))}
+        </TaskList>
       </Content>
 
       {/* Floating Add Button */}
-      <FloatingAddButton onClick={() => alert("New Task/Project Coming Soon!")}>➕</FloatingAddButton>
+      <FloatingAddButton onClick={() => alert("New Task Coming Soon!")}>
+        ➕
+      </FloatingAddButton>
     </Layout>
   );
 }
 
-export default Dashboard;
+export default Tasks;
