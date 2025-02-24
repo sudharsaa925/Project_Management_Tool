@@ -122,16 +122,10 @@ We welcome contributions from developers! Here's how you can contribute:
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License**. Feel free to use and modify it as needed.
-
----
-
 ## 📩 Contact & Support
 
 👤 **Sudharsaa**  
-📧 Email: [Your Email]  
+📧 Email: [Your Email](sudharsan1527@gmail.com)
 🔗 GitHub: [Your GitHub](https://github.com/sudharsaa925)  
 
-If you find this project useful, don't forget to **star the repo!** ⭐
+
